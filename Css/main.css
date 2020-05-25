@@ -1,3 +1,8 @@
+/*Font face for Rare font*/
+@font-face{
+    src: url('../Fonts/Muthiara\ demo\ version.otf');
+    font-family: 'Rare';
+}
 *{
     margin: 0;
     padding: 0;
@@ -5,18 +10,136 @@
 html,body{
     height: 100vh;
 }
+body{
+    background-color: white;
+    padding: 5px;
+    box-sizing: border-box;
+}
 .Component{
     float: left;
 }
-#Pause{
+/*Styles for pause button*/
+#Pausa{
     width: 15%;
-    height: 10%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+#Pause img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+/*Styles for stadistics*/
 #Stadistics{
     width: 70%;
-    height: 10%;
+    height: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
 }
-#Trainer{
+#Stadistics .Barra{
+    float: left;
+    width: 100%;
+    height: 48%;
+}
+#Stadistics .Barra .BarraID{
+    width: 90%;
+    height: 100%;
+    float: left;
+}
+#Stadistics .Barra .BarraID .BarraBox{
+    width: 50%;
+    height: 100%;
+    border-radius: 28px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    box-sizing: border-box;
+    transition: width .3s ease;
+}
+/*Colors for Total and Parcial*/
+#Total{
+    background-color: #c0392b;
+}
+#Parcial{
+    background-color: #2ecc71;
+}
+#Stadistics .Barra .BarraBox p{
+    font-family: 'Lobster';
+    font-size: 1.5em;
+}
+#Stadistics .Barra .PorcentajeID{
+    width: 10%;
+    height: 100%;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#Stadistics .Barra .PorcentajeID p{
+    font-family: 'Lobster';
+    font-size: 1.8em;
+}
+/*Styles for Serie*/
+#Serie{
     width: 15%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#Serie p{
+    font-family: 'Rare';
+    font-size: 2em;
+}
+
+/*Styles for exercise*/
+#Exercise{
+    width: 100%;
+    height: 75%;
+    padding-top: 5%;
+    box-sizing: border-box;
+}
+#Exercise #TitleExercise{
+    float: left;
+    width: 100%;
+    height: 18%;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    font-family: 'Lobster';
+    font-size: 2em;
+}
+#Exercise #ExerciseImg{
+    float: left;
+    width: 100%;
+    height: 50%;
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#Exercise #ExerciseImg img{
+    border-radius: 50%;
+    border: 2px solid black;
+    height: 90%;
+    width: auto;
+}
+/*Styles for time*/
+#Time{
+    width: 100%;
     height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3498db;
+}
+#Time p{
+    font-family: 'Rare';
+    font-size: 2em;
 }
