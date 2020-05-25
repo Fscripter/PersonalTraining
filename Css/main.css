@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html,body{
+    height: 100vh;
+}
+.Component{
+    float: left;
+}
+#Pause{
+    width: 15%;
+    height: 10%;
+}
+#Stadistics{
+    width: 70%;
+    height: 10%;
+}
+#Trainer{
+    width: 15%;
+    height: 10%;
+}
