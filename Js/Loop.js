@@ -1,144 +1,240 @@
 class Logic{
-    constructor(arr = new Array(),a,b,c){
-        this.MaxSerie = 5;
-        this.ActualSerie = 1;
-        this.ActualSeriePorcentaje = 0;
-        this.Serie = arr;
+    constructor(arr = new Array(),parcial,serie,total){
+        this.TotalPorcentaje = 0;
+        this.SeriesPorcentaje = [0,0,0,0];
+        this.SerieActualPorcentaje = 0;
 
+        this.CambioSerie = 0;
+        this.CambioItem = 0;
 
-        this.CantidadItem = this.Serie.length;
-        this.ActualItem = 0;
+        this.Pause = false;
+        this.TimeLooper = 1;
 
-        //Logic Pause
-        this.Pause = true;
-        this.Exit = false;
-
-       //Stadistics
-        this.a = a;
-        this.b = b;
-        this.c = c;
-
-        //Time
         this.Time = 0;
 
-        this.AumentoItem = false;
-        this.AumentoSerie = false;
+        this.SerieArr = arr;
+        this.IndiceSerie = 0;
+        this.MaxSerie = 4;
+        this.IndiceItem = 0;
+        this.MaxItem = this.SerieArr.length;
 
-        this.serieUnitario = 1/this.CantidadItem;
-        this.totalUnitario = 1/this.MaxSerie;
+        this.Parcial = parcial;
+        this.Serie = serie;
+        this.Total = total;
 
-        //FirstSerie,SecondSeri,FirstTotal,SecondTotal
-        this.FirstSerie = 0;
-        this.SecondSerie = 0;
-        this.FirstTotal = 0;
-        this.SecondTotal = 0;
+        this.ValorItemParaSerie = 1/this.MaxItem;
+        this.ValorSerieParaTotal = 1/this.MaxSerie;
     }
-    AddEvent(){
-        document.getElementById('TimeBtn').addEventListener('click', ()=>{
-            this.ChangePause();
-        })
+    secondsToString(seconds) {
+        var hour = Math.floor(seconds / 3600);
+        hour = (hour < 10)? '0' + hour : hour;
+        var minute = Math.floor((seconds / 60) % 60);
+        minute = (minute < 10)? '0' + minute : minute;
+        var second = seconds % 60;
+        second = (second < 10)? '0' + second : second;
+        return hour + ' h : ' + minute + ' m : ' + second + 's';
     }
-    ChangePause(){
+    UpdateTime(){
+        this.Time++;
+        var Text = this.secondsToString(this.Time);
+        document.getElementById('TimeGlobal').innerHTML=`${Text}`;
+    }
+    UpdatePause(){
         if(this.Pause == false){
             this.Pause = true;
-            document.getElementById('TimeBtnImg').src='Img/play-button.png';
-            document.getElementById('StateTime').innerHTML='Paused';
+            document.getElementById('TimeBtnImg').src = 'Img/pause.png';
         }
         else{
             this.Pause = false;
-            document.getElementById('TimeBtnImg').src='Img/pause.png';
-            document.getElementById('StateTime').innerHTML='Running';
+            document.getElementById('TimeBtnImg').src = 'Img/play-button.png';
         }
     }
-    SetActualItem(){
-        if(this.ActualItem < this.CantidadItem){
-            this.ActualItem++;
-            console.log('Aumento item');
-            this.AumentoItem = true;
-            this.SecondSerie = this.FirstSerie;
+    UpdateSerie(x = false){
+        if(x == false){
+            document.getElementById('SerieGlobal').innerHTML=`🔥 Serie ${this.IndiceSerie+1}`;
         }
+        else{
+            document.getElementById('SerieGlobal').innerHTML=`🔥 Sos el mejor`;
+        }
+        
     }
-    ChangeTime(){
-        document.getElementById('TimeGlobal').innerHTML=`${this.Time}s`;
+    AddEvent(){
+        document.getElementById('TimeBtn').addEventListener('click', ()=>{
+           this.UpdatePause(); 
+        });
     }
     Loop(){
         this.Looper = setInterval(()=>{
-            if(this.Exit == true){
-                clearInterval(this.Looper);
-            }
             if(this.Pause == false){
-                this.Time++;
-                this.ChangeTime();
-                if(this.ActualSerie < this.MaxSerie){
-                    if(this.ActualItem < this.CantidadItem){
-                        this.Serie[this.ActualItem].SetActual(this.a,this);
+                //Update Time
+                this.UpdateTime();
 
-                        //Actualizacion segundo a segundo de todo
+             if(this.IndiceSerie < this.MaxSerie){
 
-                        /*Primero actualizamos item */
-                        if(this.AumentoItem == false){
-                            //Usamos el first serie
-                            this.FirstSerie = this.Serie[this.ActualItem].porcentaje * this.serieUnitario;
-                            this.b.SetPorcentaje(this.FirstSerie);
-                        }
-                        else{
-                            var x = this.Serie[this.ActualItem].porcentaje * this.serieUnitario;
-                            this.LastSerie = this.SecondSerie+x;
-                            this.b.SetPorcentaje(this.SecondSerie+x);
-                        }
+                if(this.IndiceItem < this.MaxItem) {
+                    //Miro Si ya he cambiado de item
+                    if(this.CambioItem == false){
+                        //Cambio su porcentaje
+                        this.SerieArr[this.IndiceItem].SetActual(this.Parcial);
 
-                        /*Actualizamos las series*/
-                        if(this.AumentoSerie == false){
-                            //Usamos el first total
-                            if(this.AumentoItem == false){
-                                this.TotalPre = this.FirstSerie * this.totalUnitario;
+                        //Verifico para saber si termino o no
+                        if(this.SerieArr[this.IndiceItem].End == true){
+                            this.SeriesPorcentaje[this.IndiceSerie] = this.SerieArr[this.IndiceItem].porcentaje * this.ValorItemParaSerie;
+                            this.CambioItem = true; //Le digo que cambio el item
+
+                            //Aumento item indice
+                            this.IndiceItem++;
+
+                            this.Serie.SetPorcentaje(this.SeriesPorcentaje[this.IndiceSerie]);
+
+
+                            //Calculo el valor de la serie para el total
+                            if(this.CambioSerie == false){
+                                this.TotalPorcentaje = this.SeriesPorcentaje[this.IndiceSerie] * this.ValorSerieParaTotal;
+                                this.Total.SetPorcentaje(this.TotalPorcentaje);
                             }
                             else{
-                                this.TotalPre = this.LastSerie *this.totalUnitario;
+                                var rx = this.SeriesPorcentaje[this.IndiceSerie] * this.ValorSerieParaTotal; //Calculo el valor actual de la serie
+                                
+                                var ry = 0;
+                                for(var i = 0; i < this.IndiceSerie; i++){
+                                    ry+= this.SeriesPorcentaje[i];
+                                }
+                                var rrx = rx + (ry * this.ValorSerieParaTotal);
+
+                                this.Total.SetPorcentaje(rrx);
                             }
-                            this.c.SetPorcentaje(this.TotalPre);
-                            this.TotalPos = this.TotalPre;
                         }
                         else{
-                            if(this.AumentoItem == false){
-                                this.TotalPre = this.FirstSerie * this.totalUnitario;
-                                this.TotalPos+this.TotalPre;
+                            //Verifico su porcentaje Actual
+                            this.SeriesPorcentaje[this.IndiceSerie] = this.SerieArr[this.IndiceItem].porcentaje * this.ValorItemParaSerie; //Le digo que su primer valor va a ser igual a eso
+
+
+                            //Paso el valor de la serie
+
+                            this.Serie.SetPorcentaje(this.SeriesPorcentaje[this.IndiceSerie]);
+
+                            if(this.CambioSerie == false){
+                                this.TotalPorcentaje = this.SeriesPorcentaje[this.IndiceSerie] * this.ValorSerieParaTotal;
+
+                                this.Total.SetPorcentaje(this.TotalPorcentaje);
                             }
                             else{
-                                this.TotalPre = this.LastSerie *this.totalUnitario;
-                                this.TotalPos+this.TotalPre;
+                                var rx = this.SeriesPorcentaje[this.IndiceSerie] * this.ValorSerieParaTotal; //Calculo el valor actual de la serie
+                                
+                                var ry = 0;
+                                for(var i = 0; i < this.IndiceSerie; i++){
+                                    ry+= this.SeriesPorcentaje[i];
+                                }
+                                var rrx = rx + (ry * this.ValorSerieParaTotal);
+
+                                this.Total.SetPorcentaje(rrx);
                             }
-                            this.TotalTotal = this.TotalPos+this.TotalPre;
-                            this.c.SetPorcentaje(this.TotalTotal);
                         }
                     }
-                    else{                   
-                        //Aumento Serie
+                    else{
+                        this.SerieArr[this.IndiceItem].SetActual(this.Parcial);
 
-                        //resteo de Second serie
-                        this.AumentoItem = false;
-                        this.SecondSerie = 0;
-                        this.TotalPos = this.TotalPre;
-                        console.log(this.TotalPos);
-                        this.AumentoSerie = true;
-                        
-                        for(var i = 0; i < this.CantidadItem; i++){
-                            this.Serie[i].Reset();
+                        //Verifico para saber si termino o no
+                        if(this.SerieArr[this.IndiceItem].End == true){
+
+                            this.SeriesPorcentaje[this.IndiceSerie] = this.SeriesPorcentaje[this.IndiceSerie] + this.SerieArr[this.IndiceItem].porcentaje * this.ValorItemParaSerie; //Aumento el valor del array
+
+                            this.CambioItem = true; //Le digo que cambio el item
+
+                            //Aumento item indice
+                            this.IndiceItem++;
+
+                            this.Serie.SetPorcentaje(this.SeriesPorcentaje[this.IndiceSerie]);
+
+                            if(this.CambioSerie == false){
+                                this.TotalPorcentaje = this.SeriesPorcentaje[this.IndiceSerie] * this.ValorSerieParaTotal;
+                                this.Total.SetPorcentaje(this.TotalPorcentaje);
+                            }
+                            else{
+                                var rx = this.SeriesPorcentaje[this.IndiceSerie] * this.ValorSerieParaTotal; //Calculo el valor actual de la serie
+                                
+                                var ry = 0;
+                                for(var i = 0; i < this.IndiceSerie; i++){
+                                    ry+= this.SeriesPorcentaje[i];
+                                }
+                                var rrx = rx + (ry * this.ValorSerieParaTotal);
+
+                                this.Total.SetPorcentaje(rrx);
+                            }
                         }
-                        this.ActualSerie++;
-                        document.getElementById('SerieGlobal').innerHTML=`🔥 Serie ${this.ActualSerie}`;
-                        this.ActualItem = 0;
+                        else{
+                            var rx = this.SerieArr[this.IndiceItem].porcentaje * this.ValorItemParaSerie; //Valor que cambia
+
+
+                            this.Serie.SetPorcentaje(this.SeriesPorcentaje[this.IndiceSerie]+rx);
+
+                            if(this.CambioSerie == false){
+                                this.TotalPorcentaje = this.SeriesPorcentaje[this.IndiceSerie] * this.ValorSerieParaTotal;
+                                this.Total.SetPorcentaje(this.TotalPorcentaje);
+                            }
+                            else{
+                                var rx = this.SeriesPorcentaje[this.IndiceSerie] * this.ValorSerieParaTotal; //Calculo el valor actual de la serie
+                                
+                                var ry = 0;
+                                for(var i = 0; i < this.IndiceSerie; i++){
+                                    ry+= this.SeriesPorcentaje[i];
+                                }
+                                var rrx = rx + (ry * this.ValorSerieParaTotal);
+
+                                this.Total.SetPorcentaje(rrx);
+                            }
+                            if(this.CambioSerie == false){
+                                this.TotalPorcentaje = this.SeriesPorcentaje[this.IndiceSerie] * this.ValorSerieParaTotal;
+                            }
+                            else{
+                                var rx = this.SeriesPorcentaje[this.IndiceSerie] * this.ValorSerieParaTotal; //Calculo el valor actual de la serie
+                                
+                                var ry = 0;
+                                for(var i = 0; i < this.IndiceSerie; i++){
+                                    ry+= this.SeriesPorcentaje[i];
+                                }
+                                var rrx = rx + (ry * this.ValorSerieParaTotal);
+
+                                this.Total.SetPorcentaje(rrx);
+                            }
+                        }
                     }
                 }
                 else{
-                    console.log('Nice');
-                    this.Pause = true;
+                    console.log(`Se acabao la serie ${this.IndiceSerie}`);
+
+                    //Seteo los items a cero
+                    this.IndiceItem = 0;
+
+                    for(var i = 0; i < this.MaxItem; i++){
+                        this.SerieArr[i].Reset();
+                    }
+
+                    //Aumento el indice del array
+                    this.IndiceSerie++;
+
+                    //Digo que aumento la serie
+
+                    this.CambioSerie = true;
+                    this.UpdateSerie();
                 }
+             }  
+             else{
+                 console.log('Se acabaron las series');
+                 this.UpdateSerie(true);
+                 this.Pause = true;
+                 this.Quit = true;
+             }
             }
             else{
-                console.log('Toy Paused we');
+                if(this.Quit == true){
+                    clearInterval(this.Looper);
+                }
+                console.log('Estoy paused');
             }
-        },1000);
+        },this.TimeLooper);
     }
 }
-export {Logic};
+
+export{Logic};

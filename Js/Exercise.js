@@ -9,19 +9,27 @@ class Exercise{
         this.BoxTitle ='ExerciseTitle';
         this.BoxImg = 'ExerciseImg';
         this.BoxTime = 'ExerciseTimeSpan';
+
+        this.isImg = false;
+        this.End = false;
     }
     Reset(){
         this.actualTime = 0;
         this.porcentaje = 0;
+        this.isImg = false;
+        this.End = false;
     }
-    SetActual(SetPorcentaje,end){
+    SetActual(SetPorcentaje){
         if(this.actualTime<this.duration){
             this.actualTime++;
             this.porcentaje = Math.round((this.actualTime*100)/this.duration);
             
             //Draw elements
             document.getElementById(this.BoxTitle).innerHTML = this.title;
-            document.getElementById(this.BoxImg).src = this.imgUrl;
+            if(this.isImg == false){
+                document.getElementById(this.BoxImg).src = this.imgUrl;
+                this.isImg = true;
+            }
             document.getElementById(this.BoxTime).innerHTML=`${this.actualTime}s`;
 
             //SetPorcentaje
@@ -30,7 +38,7 @@ class Exercise{
             //Cuanto vales en relacion a la serie
         }
         else{
-            end.SetActualItem();
+            this.End = true;
         }
     }
 }

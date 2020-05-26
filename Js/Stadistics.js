@@ -8,7 +8,7 @@ class Graph{
         this.UpdateElements();
     }
     SetPorcentaje(Porcentaje = int){
-        this.Porcentaje = Porcentaje.toFixed(1);
+        this.Porcentaje = Math.round(Porcentaje * 100) / 100;
         this.PorcentajeToGrades();
         this.UpdateElements();
     }
