@@ -1,57 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Training</title>
     <link rel="stylesheet" href="Css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto&display=swap" rel="stylesheet">
-    
+    <script src="Js/main.js" type='module'></script>
 </head>
 <body>
-    <div id="Pausa" class="Component">
-        <img src="Img/play-button.png" alt="">
+    <div id="Top">
+        <div id="Title">
+            <h1>Entrenador Personal</h1>
+        </div>
+        <div id="Time">
+            <p>Time: <span id='TimeGlobal'>0s</span></p>
+            <div id="State">
+                <p id='StateTime'>Running</p>
+            </div>
+        </div>
     </div>
-    <div id="Stadistics" class="Component">
-        <div class="Barra">
-            <div class="BarraID">
-                <div class="BarraBox" id='Total'>
-                    <p>Serie</p>
+    <div id="Middle">
+        <div id="Exercise">
+            <h2 id='ExerciseTitle'>¡Dalo todo hoy!</h2>
+            <div class="ExerciseImgDiv">
+                <img src="Img/Exercises/man-stretching-leg-and-arms.png" id='ExerciseImg'>
+            </div>
+            <h3 id='ExerciseTime'>Time <span id='ExerciseTimeSpan'>0s</span></h3>
+        </div>
+    </div>
+    <div id="Serie">
+            <p id='SerieGlobal'>🔥 Serie 1</p>
+    </div>
+    <div id="Bottom">
+        <div id="Graphs">
+            <div class="Circle" id='EjercicioC'>
+                <div class="CircleG">
+                    <div class="Pre" id='EjercicioPre'></div>
+                    <div class="This">
+                        <p id='EjercicioText'>0%</p>
+                        <p>Ejercicio</p>
+                    </div>
                 </div>
+                <div class="Delete"></div>
             </div>
-            <div class="PorcentajeID">
-                <p>10%</p>
-            </div>
-        </div>
-        <div class="Barra">
-            <div class="BarraID">
-                <div class="BarraBox" id="Parcial">
-                    <p>Parcial</p>
+            <!-- Space for Serie-->
+            <div class="Circle" id='SerieC'>
+                <div class="CircleG">
+                    <div class="Pre" id='SeriePre'></div>
+                    <div class="This">
+                        <p id='SerieText'>0%</p>
+                        <p>Serie</p>
+                    </div>
                 </div>
+                <div class="Delete"></div>
             </div>
-            <div class="PorcentajeID">
-                <p>10%</p>
+            <!-- Space for Total-->
+            <div class="Circle" id='TotalC'>
+                <div class="CircleG">
+                    <div class="Pre" id='TotalPre'></div>
+                    <div class="This">
+                        <p id='TotalText'>0%</p>
+                        <p>Total</p>
+                    </div>
+                </div>
+                <div class="Delete"></div>
             </div>
         </div>
-    </div>
-
-    <div class="Component" id="Serie">
-        <p>#1</p>
-    </div>
-
-    </div>
-
-    <div id="Exercise" class="Component">
-        <div id="TitleExercise">
-            <h1>Abdominales</h1>
+        <div id="Menu">
+            <div class="MenuBox" id='TimeBtn'>
+                <img src="Img/play-button.png" id='TimeBtnImg'>
+            </div>
         </div>
-        <div id="ExerciseImg">
-            <img src="#" alt="">
-        </div>
-    </div>
-
-    <div id="Time" class="Component">
-        <p>0s</p>
     </div>
 </body>
 </html>

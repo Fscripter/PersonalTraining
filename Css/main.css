@@ -1,145 +1,264 @@
-/*Font face for Rare font*/
-@font-face{
-    src: url('../Fonts/Muthiara\ demo\ version.otf');
-    font-family: 'Rare';
-}
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 html,body{
     height: 100vh;
+    overflow: hidden;
 }
-body{
-    background-color: white;
-    padding: 5px;
-    box-sizing: border-box;
+/*Trial for a new thing*/
+:root{
+    --Ejercicio: 0;
 }
-.Component{
-    float: left;
-}
-/*Styles for pause button*/
-#Pausa{
-    width: 15%;
-    height: 15%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#Pause img{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-}
-/*Styles for stadistics*/
-#Stadistics{
-    width: 70%;
-    height: 15%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-}
-#Stadistics .Barra{
+/*Positionate box*/
+#Top{
     float: left;
     width: 100%;
-    height: 48%;
+    height: 10%;
+    border-bottom: 2px solid black;
 }
-#Stadistics .Barra .BarraID{
-    width: 90%;
-    height: 100%;
+#Middle{
     float: left;
+    width: 100%;
+    height: 60%;
+    border: 2px solid black;
+    border-top: none;
 }
-#Stadistics .Barra .BarraID .BarraBox{
-    width: 50%;
+#Bottom{
+    float: left;
+    width: 100%;
+    height: 30%;
+    border: 2px solid black;
+    border-top: none;
+    position: relative;
+}
+/*First Make a good top*/
+#Title{
+    float: left;
+    width: 85%;
     height: 100%;
-    border-radius: 28px;
-    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid black;
-    box-sizing: border-box;
-    transition: width .3s ease;
+    font-family: 'Lobster';
 }
-/*Colors for Total and Parcial*/
-#Total{
-    background-color: #c0392b;
+#Time{
+    float: left;
+    width: 15%;
+    height: 100%;
+    background: black;
+    color: white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-family: 'Roboto';
+    font-size: 1.4em;
+    position: relative;
+    cursor: pointer;
 }
-#Parcial{
-    background-color: #2ecc71;
+#Time #State::before{
+    content: '';
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    border-bottom: none;
+    border-left: none;
+    transform: rotate(-45deg);
+    left: calc(50% - (25px / 2));
+    top: -12px;
+    z-index: -1;
+    background: red;
 }
-#Stadistics .Barra .BarraBox p{
+#Time #State{
+    position: absolute;
+    bottom: -75px;
+    width: 80%;
+    height: 50px;
+    background: red;
+    border-radius: 28px;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+#Time:hover > #State{
+    display: flex;
+}
+.On{
+    display: flex !important;
+}
+/*Make a good MID*/
+#Serie{
+    position: absolute;
+    top: calc((30% - 20px) + 10%);
+    right: 2px;
+    height: 40px;
+    width: 200px;
+    background: red;
+    border-radius: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Roboto';
+    font-size: 1.5em;
+    font-weight: bolder;
+}
+/*Bottom style*/
+#Bottom #Graphs{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#Bottom #Graphs .Circle{
+    width: 150px;
+    height: 150px;
+    position: relative;
+}
+#Bottom #Graphs .CircleG{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+#Bottom #Graphs .This{
+    width: 100%;
+    height: 50%;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    padding-top: 5px;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
     font-family: 'Lobster';
     font-size: 1.5em;
 }
-#Stadistics .Barra .PorcentajeID{
-    width: 10%;
-    height: 100%;
-    float: left;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#Stadistics .Barra .PorcentajeID p{
-    font-family: 'Lobster';
-    font-size: 1.8em;
-}
-/*Styles for Serie*/
-#Serie{
-    width: 15%;
-    height: 15%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#Serie p{
-    font-family: 'Rare';
-    font-size: 2em;
-}
-
-/*Styles for exercise*/
-#Exercise{
-    width: 100%;
-    height: 75%;
-    padding-top: 5%;
-    box-sizing: border-box;
-}
-#Exercise #TitleExercise{
-    float: left;
-    width: 100%;
-    height: 18%;
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    font-family: 'Lobster';
-    font-size: 2em;
-}
-#Exercise #ExerciseImg{
-    float: left;
-    width: 100%;
-    height: 50%;
-    margin-top: 5%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#Exercise #ExerciseImg img{
-    border-radius: 50%;
-    border: 2px solid black;
+#Bottom #Graphs .Pre::after{
+    content: '';
+    width: 90%;
     height: 90%;
-    width: auto;
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    left: 5%;
+    top: 5%;
 }
-/*Styles for time*/
-#Time{
+#Bottom #Graphs .Pre{
     width: 100%;
-    height: 10%;
+    height: 100%;
+    border-radius: 50%;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    transform: rotate(-180deg);
+    transition: transform .3s ease;
+}
+.Delete{
+    position: absolute;
+    width: 120%;
+    height: 60%;
+    background-color: white;
+    top: 50%;
+    left: -10%;
+}
+#EjercicioPre{
+    background-image: linear-gradient(
+        green 50%, white 50%
+    );
+}
+#SeriePre{
+    background-image: linear-gradient(
+        red 50%, white 50%
+    );
+}
+#TotalPre{
+    background-image: linear-gradient(
+        blue 50%, white 50%
+    );
+}
+#EjercicioC{
+    color: green;
+}
+#SerieC{
+    color: red;
+}
+#TotalC{
+    color: blue;
+}
+/*styles for mid*/
+#Exercise{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+}
+#ExerciseTitle{
+    font-family: 'Roboto';
+    font-size: 2em;
+}
+.ExerciseImgDiv{
+    width: 250px;
+    height: 60%;
+    border: 2px solid black;
+    border-radius: 50%;
+    padding: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #3498db;
 }
-#Time p{
-    font-family: 'Rare';
-    font-size: 2em;
+.ExerciseImgDiv img{
+    max-height: 80% !important;
+    height: auto;
+    width: auto;
+    max-width: 80%;
+}
+#ExerciseTime{
+    font-family: 'Lobster';
+    font-size: 1.5em;
+}
+#Bottom #Menu{
+    width: 45px;
+    height: 100px;
+    min-height: 50px;
+    position: absolute;
+    right: 15px;
+    top: calc(50% - 50px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+#Bottom #Menu .MenuBox{
+    width: 35px;
+    height: 35px;
+    border: 2px solid black;
+    border-radius: 50%;
+    position: relative;
+}
+#Bottom #Menu .MenuBox img{
+    width: 100%;
+    height: 100%;
+}
+.MenuBox::before{
+    width: 120px;
+    height: 35px;
+    position: absolute;
+    left: -125px;
+    background-color: lightgrey;
+    border-radius: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto';
+    font-size: 1em;
+    font-weight: bolder;
+}
+#TimeBtn:hover::before{
+    content: 'Play / Pause';
 }
