@@ -8,7 +8,7 @@ class Logic{
         this.CambioItem = 0;
 
         this.Pause = false;
-        this.TimeLooper = 1;
+        this.TimeLooper = 1000;
 
         this.Time = 0;
 
@@ -104,6 +104,7 @@ class Logic{
 
                                 this.Total.SetPorcentaje(rrx);
                             }
+                            document.getElementById('ItemAudio').play();
                         }
                         else{
                             //Verifico su porcentaje Actual
@@ -162,6 +163,7 @@ class Logic{
 
                                 this.Total.SetPorcentaje(rrx);
                             }
+                            document.getElementById('ItemAudio').play();
                         }
                         else{
                             var rx = this.SerieArr[this.IndiceItem].porcentaje * this.ValorItemParaSerie; //Valor que cambia
@@ -218,10 +220,11 @@ class Logic{
 
                     this.CambioSerie = true;
                     this.UpdateSerie();
+                    document.getElementById('SerieAudio').play();
                 }
              }  
              else{
-                 console.log('Se acabaron las series');
+                 document.getElementById('TotalAudio').play();
                  this.UpdateSerie(true);
                  this.Pause = true;
                  this.Quit = true;

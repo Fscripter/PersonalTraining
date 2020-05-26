@@ -262,3 +262,7 @@ html,body{
 #TimeBtn:hover::before{
     content: 'Play / Pause';
 }
+.audio{
+    width: 0;
+    height: 0;
+}
