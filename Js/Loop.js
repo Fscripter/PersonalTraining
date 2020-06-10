@@ -7,7 +7,7 @@ class Logic{
         this.CambioSerie = 0;
         this.CambioItem = 0;
 
-        this.Pause = false;
+        this.Pause = true;
         this.TimeLooper = 1000;
 
         this.Time = 0;
@@ -42,11 +42,11 @@ class Logic{
     UpdatePause(){
         if(this.Pause == false){
             this.Pause = true;
-            document.getElementById('TimeBtnImg').src = 'Img/pause.png';
+            document.getElementById('TimeBtnImg').src = 'Img/play-button.png';
         }
         else{
             this.Pause = false;
-            document.getElementById('TimeBtnImg').src = 'Img/play-button.png';
+            document.getElementById('TimeBtnImg').src = 'Img/pause.png';
         }
     }
     UpdateSerie(x = false){

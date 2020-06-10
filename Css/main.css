@@ -7,7 +7,272 @@ html,body{
     height: 100vh;
     overflow: hidden;
 }
-/*Trial for a new thing*/
+@media (min-width: 320px) and (max-width: 425px){
+    :root{
+        --Ejercicio: 0;
+    }
+    /*Positionate box*/
+    #Top{
+        float: left;
+        width: 100%;
+        height: 10%;
+        border-bottom: 2px solid black;
+    }
+    #Middle{
+        float: left;
+        width: 100%;
+        height: 60%;
+        border: 2px solid black;
+        border-top: none;
+    }
+    #Bottom{
+        float: left;
+        width: 100%;
+        height: 30%;
+        border: 2px solid black;
+        border-top: none;
+        position: relative;
+    }
+        /*First Make a good top*/
+    #Title{
+        float: left;
+        width: 70%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Lobster';
+    }
+    #Title h1{
+        font-size: 1.3em;
+    }
+    #Time{
+        float: left;
+        width: 30%;
+        height: 100%;
+        background: black;
+        color: white;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        font-family: 'Roboto';
+        font-size: 0.8em;
+        position: relative;
+        cursor: pointer;
+    }
+    #Time #State::before{
+        content: '';
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        border-bottom: none;
+        border-left: none;
+        transform: rotate(-45deg);
+        left: calc(50% - (25px / 2));
+        top: -12px;
+        z-index: -1;
+        background: red;
+    }
+    #Time #State{
+        position: absolute;
+        bottom: -75px;
+        width: 80%;
+        height: 50px;
+        background: red;
+        border-radius: 28px;
+        justify-content: center;
+        align-items: center;
+        display: none;
+    }
+    #Time:hover > #State{
+        display: flex;
+    }
+    .On{
+        display: flex !important;
+    }
+    #Serie{
+        position: absolute;
+        top: calc((30% - 20px) + 10%);
+        right: 2px;
+        height: 40px;
+        width: 100px;
+        background: red;
+        border-radius: 28px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-family: 'Roboto';
+        font-size: 1em;
+        font-weight: bolder;
+    }
+    #Bottom #Graphs{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    #Bottom #Graphs .Circle{
+        width: 100px;
+        height: 100px;
+        position: relative;
+    }
+    #Bottom #Graphs .CircleG{
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+    #Bottom #Graphs .This{
+        width: 100%;
+        height: 50%;
+        z-index: 10;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        padding-top: 5px;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        font-family: 'Lobster';
+        font-size: 1em;
+    }
+    #Bottom #Graphs .Pre::after{
+        content: '';
+        width: 90%;
+        height: 90%;
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        left: 5%;
+        top: 5%;
+    }
+    #Bottom #Graphs .Pre{
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        transform: rotate(-180deg);
+        transition: transform .3s ease;
+    }
+    .Delete{
+        position: absolute;
+        width: 120%;
+        height: 60%;
+        background-color: white;
+        top: 50%;
+        left: -10%;
+    }
+    #EjercicioPre{
+        background-image: linear-gradient(
+            green 50%, white 50%
+        );
+    }
+    #SeriePre{
+        background-image: linear-gradient(
+            red 50%, white 50%
+        );
+    }
+    #TotalPre{
+        background-image: linear-gradient(
+            blue 50%, white 50%
+        );
+    }
+    #EjercicioC{
+        color: green;
+    }
+    #SerieC{
+        color: red;
+    }
+    #TotalC{
+        color: blue;
+    }
+    /*styles for mid*/
+    #Exercise{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+        height: 100%;
+    }
+    #ExerciseTitle{
+        font-family: 'Roboto';
+        font-size: 2em;
+    }
+    .ExerciseImgDiv{
+        width: 250px;
+        height: 250px;
+        border: 2px solid black;
+        border-radius: 50%;
+        padding: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: white;
+    }
+    .ExerciseImgDiv img{
+        max-height: 100% !important;
+        height: auto;
+        width: auto;
+        max-width: 100%;
+        padding: 15%;
+    }
+    #ExerciseTime{
+        font-family: 'Lobster';
+        font-size: 1.5em;
+    }
+    #Bottom #Menu{
+        width: 65px;
+        height: 100px;
+        min-height: 50px;
+        position: fixed;
+        left: calc(50% - (65px / 2 ));
+        bottom: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+    #Bottom #Menu .MenuBox{
+        width: 45px;
+        height: 45px;
+        border: 2px solid black;
+        border-radius: 50%;
+        position: relative;
+    }
+    #Bottom #Menu .MenuBox img{
+        width: 100%;
+        height: 100%;
+    }
+    .MenuBox::before{
+        width: 120px;
+        height: 25px;
+        position: absolute;
+        left: -125px;
+        top: calc(25px / 2);
+        background-color: lightgrey;
+        border-radius: 28px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Roboto';
+        font-size: 1em;
+        font-weight: bolder;
+    }
+    #TimeBtn:hover::before{
+        content: 'Play / Pause';
+    }
+    .audio{
+        width: 0;
+        height: 0;
+    }
+}
+@media (min-width: 425px){
+    /*Trial for a new thing*/
 :root{
     --Ejercicio: 0;
 }
@@ -223,7 +488,7 @@ html,body{
     font-size: 1.5em;
 }
 #Bottom #Menu{
-    width: 45px;
+    width: 65px;
     height: 100px;
     min-height: 50px;
     position: absolute;
@@ -235,8 +500,8 @@ html,body{
     justify-content: space-around;
 }
 #Bottom #Menu .MenuBox{
-    width: 35px;
-    height: 35px;
+    width: 65px;
+    height: 65px;
     border: 2px solid black;
     border-radius: 50%;
     position: relative;
@@ -265,4 +530,5 @@ html,body{
 .audio{
     width: 0;
     height: 0;
+}
 }
